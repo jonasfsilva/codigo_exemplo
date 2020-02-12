@@ -1,15 +1,19 @@
 class Conta:
 
-    identificador = 0
-    saldo = 0
+    __identificador = 0
+    __saldo = 0
     
     def __init__(self, identificador, saldo):
-        self.identificador = identificador
-        self.saldo = saldo
+        self.__identificador = identificador
+        self.__saldo = saldo
 
     def __repr__(self):
         return "{0},{1}".format(
-            self.identificador, self.saldo)    
+            self.__identificador, self.saldo)    
+
+    @property
+    def saldo(self):
+        return self.__saldo
 
     def adicionar_saldo(self):
         pass
@@ -17,7 +21,7 @@ class Conta:
     def remover_saldo(self):
         pass
 
-    def executa_transacao(self):
+    def executa_transacao(self, transacao):
         pass
 
     def aplica_multa(self):
