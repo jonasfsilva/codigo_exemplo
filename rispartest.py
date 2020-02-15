@@ -11,7 +11,7 @@ args = parser.parse_args()
 
 def main():
     gerencia_transacoes = GerenciaTransacoes()
-    gerencia_transacoes.load_data(args.contas_csv, args.transacoes_csv)
+    gerencia_transacoes.carregar_dados(args.contas_csv, args.transacoes_csv)
     gerencia_transacoes.execute()
     gerencia_transacoes.exibir_saldos()
     
