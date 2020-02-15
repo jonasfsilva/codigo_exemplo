@@ -1,28 +1,31 @@
 class Conta:
 
-    __identificador = 0
-    __saldo = 0
+    identificador = 0
+    saldo = 0
+    multa = 5
     
     def __init__(self, identificador, saldo):
-        self.__identificador = identificador
-        self.__saldo = saldo
+        self.identificador = identificador
+        self.saldo = int(saldo)
 
-    def __repr__(self):
+    def __str__(self):
         return "{0},{1}".format(
-            self.__identificador, self.saldo)    
+            self.identificador, self.saldo)    
 
-    @property
-    def saldo(self):
-        return self.__saldo
+    def adicionar_saldo(self, transacao):
+        self.saldo += transacao.valor
 
-    def adicionar_saldo(self):
-        pass
-
-    def remover_saldo(self):
-        pass
+    def remover_saldo(self, transacao):
+        self.saldo -= transacao.valor
 
     def executa_transacao(self, transacao):
-        pass
+        if transacao.e_debito:
+            self.remover_saldo(transacao)
+        else:
+            self.adicionar_saldo(transacao)
+            
+        self.aplica_multa(transacao)
 
-    def aplica_multa(self):
-        pass
+    def aplica_multa(self, transacao):
+        if self.saldo < 0 and transacao.e_debito:
+            self.saldo -= self.multa 

@@ -2,21 +2,18 @@ import csv
 import argparse
 from contas import Conta
 from transacoes import Transacao
-from utils import ManageOperations
+from services import GerenciaTransacoes
 
 parser = argparse.ArgumentParser()
 parser.add_argument('contas_csv')
 parser.add_argument('transacoes_csv')
 args = parser.parse_args()
 
-
 def main():
-
-    manage_operations = ManageOperations()
-    manage_operations.load_data(args.contas_csv, args.transacoes_csv)
-    manage_operations.execute()
-    
-    #manager_instance.show_saldos()
+    gerencia_transacoes = GerenciaTransacoes()
+    gerencia_transacoes.load_data(args.contas_csv, args.transacoes_csv)
+    gerencia_transacoes.execute()
+    gerencia_transacoes.exibir_saldos()
     
     return 
 

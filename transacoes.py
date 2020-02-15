@@ -1,12 +1,11 @@
 class Transacao:
     
     identificador_conta = 0
-    e_debito = True
-    __valor = 0
+    _valor_original = 0
     
     def __init__(self, identificador_conta, valor):
         self.identificador_conta = identificador_conta
-        self.__valor = valor
+        self._valor_original = int(valor)
     
     def __repr__(self):
         return "{0},{1}".format(
@@ -14,9 +13,10 @@ class Transacao:
     
     @property
     def valor(self):
-        return self.__valor
+        return abs(self._valor_original)
 
-    def _verifica_operacao(self):
-        if self.__valor > 0:
+    @property
+    def e_debito(self):
+        if self._valor_original < 0:
             return True
         return False

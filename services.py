@@ -4,7 +4,7 @@ from transacoes import Transacao
 from contas import Conta 
 
 
-class ManageOperations:
+class GerenciaTransacoes:
 
     contas = []
     transacoes = []
@@ -26,14 +26,15 @@ class ManageOperations:
 
         for transacao_id, transacao_valor in transacoes_lines.items():
             self.transacoes.append(Transacao(transacao_id, transacao_valor))
-        
-    def execute(self):
-        #contas que tem saldos
-        #percorrer as transacoes pegar as contas e aplicar as transacoes
+    
+    def executa_transacao_na_conta(self, transacao, conta):
+        if conta.identificador == transacao.identificador_conta:
+            conta.executa_transacao(transacao)
 
+    def exibir_saldos(self):
+        [print(conta) for conta in self.contas]
+
+    def execute(self):
         for transacao in self.transacoes:
             for conta in self.contas:
-                conta.identificadot = transacao.identificadot_conta
-                conta.aplica_transacao(transacao)
-
-        [print(c) for c in self.contas]
+                self.executa_transacao_na_conta(transacao, conta)
